@@ -23,6 +23,8 @@ def index():
         Libro(nombre="La Celestina", tienda="Ibero", precio=23.0, gastos_envio=7.0)
     ]
 
+    libros.sort(key=lambda libro: libro.total)
+
     data ={
         'titulo': 'Book Hunt',
         'tutorial': 'Ingresa un listado de ISBN',
