@@ -9,24 +9,28 @@
 <body>
 
     <main>
-        <h1>{{ data.titulo }}</h1>
         <div class="buscador">
-            <input type="text" size="100">
-            <button> Buscar </button>
+            <form action="/" method="POST">
+                <input type="text" name="nombre_libro" placeholder="Buscar por nombre de libro" />
+                <button type="submit">Buscar</button>
+            </form>
         </div>
-        
+
         <div class="book-container">
-            {% for libro in data.libros %}
-                <div class="book-card">
-                    <h3>{{ libro.nombre }}</h3>
-                    <p><strong>Tienda:</strong> {{ libro.tienda }}</p>
-                    <p><strong>Precio:</strong> {{ libro.precio }}€</p>
-                    <p class="shipping"><strong>Gastos de Envío:</strong> {{ libro.gastos_envio }}€</p>
-                    <p class="total"><strong>Total:</strong> {{ libro.total }}€</p>
-                </div>
-            {% endfor %}
+            {% if libros %}
+                {% for libro in libros %}
+                    <div class="book-card">
+                        <h3>{{ libro.nombre }}</h3>
+                        <p><strong>Tienda:</strong> {{ libro.tienda }}</p>
+                        <p><strong>Precio:</strong> ${{ libro.precio }}</p>
+                        <p><strong>Gastos de Envío:</strong> ${{ libro.gastos_envio }}</p>
+                        <p><strong>Total:</strong> ${{ libro.total }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No se encontraron libros con ese nombre.</p>
+            {% endif %}
         </div>
-    
     </main>
     
 </body>

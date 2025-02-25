@@ -1,8 +1,8 @@
-from flask import Flask, render_template # type: ignore
+from flask import Flask, render_template, request # type: ignore
 
 app=Flask(__name__)
 
-@app.route('/') # Vistas, en este caso raíz
+@app.route('/', methods=['GET', 'POST']) # Vistas, en este caso raíz
 def index():
     class Libro():
         def __init__(self, nombre='Error de Carga', tienda = 'Error de Carga', precio=0.0, gastos_envio=0.0):
@@ -25,12 +25,13 @@ def index():
 
     libros.sort(key=lambda libro: libro.total)
 
-    data ={
-        'titulo': 'Book Hunt',
-        'tutorial': 'Ingresa un listado de ISBN',
-        'libros': libros
-    }
-    return render_template('index.html', data=data)
+    if request.method == 'POST':
+        query = request.form.get('nombre_libro', '').lower()  # Obtener el término de búsqueda
+        
+        libros = [libro for libro in libros if query in libro.nombre.lower()]
+
+
+    return render_template('index.html', libros=libros)
 
 if __name__ == '__main__':
     app.run(debug=True,port=8081)
