@@ -20,8 +20,8 @@ jobs:
 
       - name: Add upstream and sync
         run: |
-          git remote add upstream https://github.com/organizacion/repo-original.git
+          git remote add upstream https://github.com/UFV-INGINF/BookHunt
           git fetch upstream
-          git checkout master
-          git merge upstream/master --allow-unrelated-histories || echo "No changes to merge"
-          git push origin master
+          git checkout main
+          git merge upstream/main --allow-unrelated-histories || echo "No changes to merge"
+          git push origin main
